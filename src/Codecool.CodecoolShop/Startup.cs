@@ -53,7 +53,7 @@ namespace Codecool.CodecoolShop
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Product}/{action=Index}/{id?}");
+                    pattern: "{controller=Welcome}/{action=Index}/{id?}");
             });
 
             SetupInMemoryDatabases();
@@ -65,15 +65,22 @@ namespace Codecool.CodecoolShop
             IProductCategoryDao productCategoryDataStore = ProductCategoryDaoMemory.GetInstance();
             ISupplierDao supplierDataStore = SupplierDaoMemory.GetInstance();
 
-            Supplier amazon = new Supplier{Name = "Amazon", Description = "Digital content and services"};
+            Supplier amazon = new Supplier { Name = "Amazon", Description = "Digital content and services" };
             supplierDataStore.Add(amazon);
-            Supplier lenovo = new Supplier{Name = "Lenovo", Description = "Computers"};
+            Supplier lenovo = new Supplier { Name = "Lenovo", Description = "Computers" };
             supplierDataStore.Add(lenovo);
-            ProductCategory tablet = new ProductCategory {Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
+            Supplier apple = new Supplier { Name = "Apple", Description = "Electronic devices" };
+            supplierDataStore.Add(apple);
+            ProductCategory tablet = new ProductCategory { Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
+            ProductCategory computerMouse = new ProductCategory { Name = "ComputerMouse", Department = "Hardware", Description = "A computer mouse makes your life easier" };
+            ProductCategory headPhones = new ProductCategory { Name = "Headphones", Department = "Hardware", Description = "You need headphones to listen the music." };
             productCategoryDataStore.Add(tablet);
+            productCategoryDataStore.Add(headPhones);
+            productCategoryDataStore.Add(computerMouse);
             productDataStore.Add(new Product { Name = "Amazon Fire", DefaultPrice = 49.9m, Currency = "USD", Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", ProductCategory = tablet, Supplier = amazon });
             productDataStore.Add(new Product { Name = "Lenovo IdeaPad Miix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
             productDataStore.Add(new Product { Name = "Amazon Fire HD 8", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = tablet, Supplier = amazon });
+            productDataStore.Add(new Product { Name = "Apple Headphones", DefaultPrice = 50.0m, Currency = "USD", Description = "Apple's latest version of headphones", ProductCategory = headPhones, Supplier = apple});
         }
     }
 }
