@@ -81,6 +81,11 @@ namespace Codecool.CodecoolShop
             productDataStore.Add(new Product { Name = "Lenovo IdeaPad Miix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
             productDataStore.Add(new Product { Name = "Amazon Fire HD 8", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = tablet, Supplier = amazon });
             productDataStore.Add(new Product { Name = "Apple Headphones", DefaultPrice = 50.0m, Currency = "USD", Description = "Apple's latest version of headphones", ProductCategory = headPhones, Supplier = apple});
+            productDataStore.Add(new Product { Name = "Lenovo Headphones", DefaultPrice = 30.0m, Currency = "USD", Description = "The most common heaphones", ProductCategory = headPhones, Supplier = lenovo});
+            productDataStore.Add(new Product { Name = "Lenovo Headphones 2", DefaultPrice = 35.0m, Currency = "USD", Description = "Lenovo's new headphones product", ProductCategory = headPhones, Supplier = lenovo});
+            productDataStore.Add(new Product { Name = "Amazon Mouse", DefaultPrice = 39.0m, Currency = "USD", Description = "Amazon product", ProductCategory = computerMouse, Supplier = amazon});
+            productDataStore.Add(new Product { Name = "Apple mouse", DefaultPrice = 99.0m, Currency = "USD", Description = "Apple product", ProductCategory = computerMouse, Supplier = apple});
+            productDataStore.Add(new Product { Name = "Lenovo first Edition", DefaultPrice = 59.0m, Currency = "USD", Description = "Lenovo product", ProductCategory = computerMouse, Supplier = lenovo});
         }
     }
 }
