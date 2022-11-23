@@ -1,0 +1,53 @@
+﻿<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+@model Codecool.CodecoolShop.Models.ShoppingCart;
+
+
+<h1>Shopping cart</h1>
+<hr></hr>
+
+<body>
+    <table>
+
+
+        <tr>
+
+            <th>
+                Product Name
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Subtotal
+            </th>
+
+        </tr>
+        @{decimal total = 0;}
+        @foreach (var product in Model.Produtcs)
+        {
+
+            <tr>
+                <td>@product.Key.Name</td>
+                <td>@product.Key.DefaultPrice</td> 
+                <td>@product.Value</td>
+                <td>@(product.Key.DefaultPrice * product.Value)</td>
+            </tr>
+             total += @product.Key.DefaultPrice * product.Value;
+        }
+
+
+    </table>
+    <hr />
+
+    <h3>
+        Total Price :  @total
+    </h3>
+
+</body>
