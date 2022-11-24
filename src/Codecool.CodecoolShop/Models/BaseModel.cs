@@ -7,6 +7,7 @@ namespace Codecool.CodecoolShop.Models
     public abstract class BaseModel
     {
         public Guid Id { get; set; }
+        public int IntId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

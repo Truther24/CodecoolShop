@@ -69,12 +69,81 @@ namespace Codecool.CodecoolShop.Controllers
 
 
 
-        /*[HttpPost]
-        public IActionResult GetData()
+        [HttpPost]
+        [Route("/Sort")]
+        public IActionResult Sort(string amazon, string apple, string lenovo, string tablet, string mouse, string headphones)
         {
-            string nname = Request.Form["name"];
-            return View("Index",nname);
-        }*/
+            List<Product> returnProducts = new List<Product>();
+
+            var allProducts = ProductService.GetALlProducts().ToList();
+
+            if (
+                amazon is null && apple is null
+                && lenovo is null && tablet is null
+                && mouse is null && headphones is null
+                )
+            {
+                return View("Index", allProducts);
+            }
+
+            if (amazon == "on")
+            {
+                var amazonProd = ProductService.GetProductsForSupplier(1);
+                foreach (var product in amazonProd)
+                {
+                    returnProducts.Add(product);
+                }
+            }
+
+            if (lenovo == "on")
+            {
+                var amazonProd = ProductService.GetProductsForSupplier(2);
+                foreach (var product in amazonProd)
+                {
+                    returnProducts.Add(product);
+                }
+            }
+
+            if (apple == "on")
+            {
+                var amazonProd = ProductService.GetProductsForSupplier(3);
+                foreach (var product in amazonProd)
+                {
+                    returnProducts.Add(product);
+                }
+            }
+
+
+            if (tablet == "on")
+            {
+                var amazonProd = ProductService.GetProductsForCategory(1);
+                foreach (var product in amazonProd)
+                {
+                    returnProducts.Add(product);
+                }
+            }
+
+            if (headphones == "on")
+            {
+                var amazonProd = ProductService.GetProductsForCategory(2);
+                foreach (var product in amazonProd)
+                {
+                    returnProducts.Add(product);
+                }
+            }
+
+            if (mouse == "on")
+            {
+                var amazonProd = ProductService.GetProductsForCategory(3);
+                foreach (var product in amazonProd)
+                {
+                    returnProducts.Add(product);
+                }
+            }
+
+            returnProducts = returnProducts.Distinct().ToList();
+            return View("Index", returnProducts.ToList());
+        }
 
     }
 

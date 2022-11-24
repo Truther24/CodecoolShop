@@ -59,15 +59,15 @@ namespace Codecool.CodecoolShop
 
         private void SetupInMemoryDatabases()
         {
-            Supplier amazon = new Supplier { Name = "Amazon", Description = "Digital content and services" };
+            Supplier amazon = new Supplier {IntId = 1, Name = "Amazon", Description = "Digital content and services" };
             DatabaseSupplier.Suppliers.Add(amazon);
-            Supplier lenovo = new Supplier { Name = "Lenovo", Description = "Computers" };
+            Supplier lenovo = new Supplier { IntId = 2, Name = "Lenovo", Description = "Computers" };
             DatabaseSupplier.Suppliers.Add(lenovo);
-            Supplier apple = new Supplier() { Name = "Apple", Description = "Electronic devices" };
+            Supplier apple = new Supplier() { IntId = 3, Name = "Apple", Description = "Electronic devices" };
             DatabaseSupplier.Suppliers.Add(apple);
-            ProductCategory tablet = new ProductCategory { Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
-            ProductCategory computerMouse = new ProductCategory { Name = "ComputerMouse", Department = "Hardware", Description = "A computer mouse makes your life easier" };
-            ProductCategory headPhones = new ProductCategory { Name = "Headphones", Department = "Hardware", Description = "You need headphones to listen the music." };
+            ProductCategory tablet = new ProductCategory { IntId = 1, Name = "Tablet", Department = "Hardware", Description = "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display." };
+            ProductCategory computerMouse = new ProductCategory { IntId = 3, Name = "ComputerMouse", Department = "Hardware", Description = "A computer mouse makes your life easier" };
+            ProductCategory headPhones = new ProductCategory { IntId = 2, Name = "Headphones", Department = "Hardware", Description = "You need headphones to listen the music." };
             DatabaseProductCategory.Products.Add(tablet);
             DatabaseProductCategory.Products.Add(headPhones);
             DatabaseProductCategory.Products.Add(computerMouse);
