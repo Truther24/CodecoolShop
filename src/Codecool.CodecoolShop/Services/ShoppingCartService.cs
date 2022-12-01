@@ -12,8 +12,21 @@ namespace Codecool.CodecoolShop.Services
             }
             else
             {
-            DatabaseShoppingCart.shoppingCart.Produtcs[product] = 1;
+                DatabaseShoppingCart.shoppingCart.Produtcs[product] = 1;
 
+            }
+        }
+
+
+        public void RemoveProductFromCart(Product product)
+        {
+            if (DatabaseShoppingCart.shoppingCart.Produtcs[product] == 1)
+            {
+                DatabaseShoppingCart.shoppingCart.Produtcs.Remove(product);
+            }
+            else 
+            {
+                DatabaseShoppingCart.shoppingCart.Produtcs[product] -= 1;
             }
         }
     }

@@ -14,6 +14,7 @@
 
 
         <tr>
+            
 
             <th>
                 Product Name
@@ -27,19 +28,31 @@
             <th>
                 Subtotal
             </th>
+            
 
         </tr>
-        @{decimal total = 0;}
+        @{
+            decimal total = 0;
+        }
         @foreach (var product in Model.Produtcs)
         {
 
             <tr>
+
                 <td>@product.Key.Name</td>
-                <td>@product.Key.DefaultPrice</td> 
-                <td>@product.Value</td>
+
+                <td>@product.Key.DefaultPrice</td>
+                <td>@product.Value &emsp; &emsp;
+                    <style="display: inline-block">
+                    &emsp;<a  asp-controller="ShoppingCart" asp-action="IncreaseQuantity" asp-route-id="@product.Key.Id">&#8593</a>&emsp;
+
+                    &emsp;<a asp-controller="ShoppingCart" asp-action="DecreaseQuantity" asp-route-id="@product.Key.Id" style="display: inline-block">&#8595</a>&emsp;
+                </td>
                 <td>@(product.Key.DefaultPrice * product.Value)</td>
+                 
+                
             </tr>
-             total += @product.Key.DefaultPrice * product.Value;
+            total += @product.Key.DefaultPrice * product.Value;
         }
 
 
