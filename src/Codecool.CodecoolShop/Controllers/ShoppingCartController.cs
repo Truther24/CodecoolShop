@@ -52,7 +52,10 @@ namespace Codecool.CodecoolShop.Controllers
             return Redirect("/ShoppingCart");
         }
 
-
+        public IActionResult Checkout()
+        {
+            return View("Checkout", DatabaseShoppingCart.shoppingCart);
+        }
 
 
     }

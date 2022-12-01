@@ -53,6 +53,7 @@
                 
             </tr>
             total += @product.Key.DefaultPrice * product.Value;
+            
         }
 
 
@@ -60,7 +61,9 @@
     <hr />
 
     <h3>
-        Total Price :  @total
+        Total Price :  @total<br />
+        
     </h3>
+    <h3><a asp-controller="ShoppingCart" asp-action="Checkout">Checkout</a></h3>
 
 </body>
