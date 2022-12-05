@@ -9,17 +9,21 @@ using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Configuration;
 
 namespace Codecool.CodecoolShop.Controllers
 {
     public class ProductController : Controller
     {
+        public readonly IConfiguration Configuration;
+
         private readonly ILogger<ProductController> _logger;
         public ProductService ProductService { get; set; }
         public ShoppingCartService shoppingCartService { get; set; } = new();
 
-        public ProductController(ILogger<ProductController> logger)
+        public ProductController(ILogger<ProductController> logger, IConfiguration configuration)
         {
+            Configuration = configuration;
             _logger = logger;
             ProductService = new ProductService();
         }
@@ -29,7 +33,7 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index()
         {
             /*var products = ProductService.GetProductsForCategory(2);*/
-            var products = ProductService.GetALlProducts();
+            var products = ProductService.GetALlProducts(Configuration);
             return View(products.ToList());
         }
 
@@ -38,14 +42,14 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Cart()
         {
             /*var products = ProductService.GetProductsForCategory(2);*/
-            var products = ProductService.GetALlProducts();
+            var products = ProductService.GetALlProducts(Configuration);
             var aaa = Request.Form["name"];
             return View("Index", products.ToList());
         }
 
         public IActionResult AddToCart(Guid id)
         {
-            var products = ProductService.GetALlProducts();
+            var products = ProductService.GetALlProducts(Configuration);
             foreach (var product in products)
             {
                 if (product.Id == id)
@@ -75,7 +79,7 @@ namespace Codecool.CodecoolShop.Controllers
         {
             List<Product> returnProducts = new List<Product>();
 
-            var allProducts = ProductService.GetALlProducts().ToList();
+            var allProducts = ProductService.GetALlProducts(Configuration).ToList();
 
             if (
                 amazon is null && apple is null

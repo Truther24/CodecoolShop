@@ -1,6 +1,7 @@
 ﻿using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +9,11 @@ namespace Codecool.CodecoolShop.Controllers
 {
     public class ShoppingCartController : Controller
     {
-
+        public readonly IConfiguration Configuration;
+        public ShoppingCartController(IConfiguration configuration)
+        {
+            Configuration= configuration;
+        }
         public Product product = new Product();
 
         public ProductService ProductService { get; set; } = new ProductService();
@@ -26,7 +31,7 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult IncreaseQuantity(Guid id)
         {
-            var products = ProductService.GetALlProducts();
+            var products = ProductService.GetALlProducts(Configuration);
             foreach (var product in products)
             {
                 if (product.Id == id)
@@ -40,7 +45,7 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult DecreaseQuantity(Guid id)
         {
-            var products = ProductService.GetALlProducts();
+            var products = ProductService.GetALlProducts(Configuration);
             foreach (var product in products)
             {
                 if (product.Id == id)
