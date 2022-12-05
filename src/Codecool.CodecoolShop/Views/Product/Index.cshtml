@@ -1,3 +1,4 @@
+@model List<Codecool.CodecoolShop.Models.Product>
 <head>
      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -7,7 +8,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model List<Codecool.CodecoolShop.Models.Product>
 
 <div style="width: 120px; height: 300px; left:10px; position:fixed;">
     <strong>Filter by:</strong>
@@ -59,6 +59,8 @@
                 </div>
             </div>
         </div>
+
+        <a asp-area="" asp-controller="Test" asp-action="Index">Add To Cart</a>
 
         <br />
         <br />
