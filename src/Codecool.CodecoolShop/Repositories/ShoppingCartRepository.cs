@@ -9,19 +9,30 @@ namespace Codecool.CodecoolShop.Repositories
 {
     public class ShoppingCartRepository : BaseRepository
     {
+        //private SqlConnection connection;
+
         public ShoppingCartRepository(IConfiguration _configuration) : base(_configuration)
         {
         }
 
         public void InsertIntoShoppingCart(Guid id)
         {
-            var sql = $"insert into ShoppingCart(id)\r\nvalues({id})";
+            //var sql = $"insert into ShoppingCart(id)\r\nvalues({id})";
 
-            using (var connection = new SqlConnection(ConnectionString))
+            //using (var connection = new SqlConnection(ConnectionString))
+            //{
+            //    connection.Execute(sql);
+            //}
+
+
+            string sql = "insert into ShoppingCart(id) values(@id)";
+            using(var connection = new SqlConnection(ConnectionString))
             {
-                connection.Execute(sql);
-            }
-
+                connection.Open();
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("id",id);
+            command.ExecuteNonQuery();
+            }    
         }
     }
 }
