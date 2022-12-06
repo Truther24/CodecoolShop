@@ -9,18 +9,23 @@ using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
+using Codecool.CodecoolShop.Repositories;
 
 namespace Codecool.CodecoolShop.Controllers
 {
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
+        private readonly ProductRepository productRepository;
+
         public ProductService ProductService { get; set; }
         public ShoppingCartService shoppingCartService { get; set; } = new();
+        
 
-        public ProductController(ILogger<ProductController> logger)
+        public ProductController(ILogger<ProductController> logger,ProductRepository productRepository)
         {
             _logger = logger;
+            this.productRepository = productRepository;
             ProductService = new ProductService();
         }
 
@@ -29,7 +34,8 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index()
         {
             /*var products = ProductService.GetProductsForCategory(2);*/
-            var products = ProductService.GetALlProducts();
+            /*var products = ProductService.GetALlProducts();*/
+            var products = productRepository.GetAllProducts();
             return View(products.ToList());
         }
 
