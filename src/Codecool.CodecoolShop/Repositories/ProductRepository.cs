@@ -17,7 +17,19 @@ namespace Codecool.CodecoolShop.Repositories
 
         public List<Product> GetAllProducts()
         {
-            var sql = "select * from product";
+            var sql = "select p.name , p.defaultPrice, p.currency , p.description , s.name as supplierName , pr.name as CategoryName from Product p \r\ninner join Supplier s on p.supplierId = s.id\r\ninner join ProductCategory pr on p.productCategoryId = pr.id";
+            var products = new List<Product>();
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                products = connection.Query<Product>(sql).ToList();
+            }
+            return products;
+        }
+
+
+        public List<Product> GetAmazonSupplierProducts()
+        {
+            var sql = "select p.name , p.defaultPrice, p.currency , p.description , s.name as supplierName , pr.name as CategoryName from Product p \r\ninner join Supplier s on p.supplierId = s.id\r\ninner join ProductCategory pr on p.productCategoryId = pr.id\r\nwhere s.id = 1";
             var products = new List<Product>();
             using (var connection = new SqlConnection(ConnectionString))
             {
