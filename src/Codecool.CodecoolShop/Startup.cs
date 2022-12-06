@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,8 @@ namespace Codecool.CodecoolShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<ProductRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,8 +74,8 @@ namespace Codecool.CodecoolShop
             DatabaseProductCategory.Products.Add(tablet);
             DatabaseProductCategory.Products.Add(headPhones);
             DatabaseProductCategory.Products.Add(computerMouse);
-            DatabaseProducts.Products.Add(new Product { Id = Guid.NewGuid(), Name = "Amazon Fire", DefaultPrice = 49.9m, Currency = "USD", Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", ProductCategory = tablet, Supplier = amazon });
-            DatabaseProducts.Products.Add(new Product { Id = Guid.NewGuid(), Name = "Lenovo IdeaPad Miix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
+            DatabaseProducts.Products.Add(new Product { Id = Guid.NewGuid(), Name = "amazonFire", DefaultPrice = 49.9m, Currency = "USD", Description = "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", ProductCategory = tablet, Supplier = amazon });
+            DatabaseProducts.Products.Add(new Product { Id = Guid.NewGuid(), Name = "Lenovo IdeaPad Mix 700", DefaultPrice = 479.0m, Currency = "USD", Description = "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", ProductCategory = tablet, Supplier = lenovo });
             DatabaseProducts.Products.Add(new Product { Id = Guid.NewGuid(), Name = "Amazon Fire HD 8", DefaultPrice = 89.0m, Currency = "USD", Description = "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", ProductCategory = tablet, Supplier = amazon });
             DatabaseProducts.Products.Add(new Product { Id = Guid.NewGuid(), Name = "Apple Headphones", DefaultPrice = 50.0m, Currency = "USD", Description = "Apple's latest version of headphones", ProductCategory = headPhones, Supplier = apple });
             DatabaseProducts.Products.Add(new Product { Id = Guid.NewGuid(), Name = "Lenovo Headphones", DefaultPrice = 30.0m, Currency = "USD", Description = "The most common heaphones", ProductCategory = headPhones, Supplier = lenovo });

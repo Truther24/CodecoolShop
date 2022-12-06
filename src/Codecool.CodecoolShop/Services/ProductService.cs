@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Codecool.CodecoolShop.Models;
-using Codecool.CodecoolShop.Queries;
 using Microsoft.Extensions.Configuration;
 
 namespace Codecool.CodecoolShop.Services
@@ -11,7 +10,6 @@ namespace Codecool.CodecoolShop.Services
     {
         public IEnumerable<Product> GetALlProducts(IConfiguration configuration)
         {
-            Queries.Queries.GetAllProducts(configuration);
             return DatabaseProducts.Products;
         }
 
