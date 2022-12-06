@@ -81,7 +81,7 @@ namespace Codecool.CodecoolShop.Controllers
         {
             List<Product> returnProducts = new List<Product>();
 
-            var allProducts = ProductService.GetALlProducts(Configuration).ToList();
+            var allProducts = productRepository.GetAllProducts();
 
             if (
                 amazon is null && apple is null
@@ -94,7 +94,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (amazon == "on")
             {
-                var amazonProd = ProductService.GetProductsForSupplier(1);
+                var amazonProd = productRepository.GetAmazonSupplierProducts(1);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -103,7 +103,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (lenovo == "on")
             {
-                var amazonProd = ProductService.GetProductsForSupplier(2);
+                var amazonProd = productRepository.GetAmazonSupplierProducts(2);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -112,7 +112,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (apple == "on")
             {
-                var amazonProd = ProductService.GetProductsForSupplier(3);
+                var amazonProd = productRepository.GetAmazonSupplierProducts(1);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -122,7 +122,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (tablet == "on")
             {
-                var amazonProd = ProductService.GetProductsForCategory(1);
+                var amazonProd = productRepository.GetCategoryProducts(1);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -131,7 +131,8 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (headphones == "on")
             {
-                var amazonProd = ProductService.GetProductsForCategory(2);
+                var amazonProd = productRepository.GetCategoryProducts(2);
+
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -140,7 +141,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (mouse == "on")
             {
-                var amazonProd = ProductService.GetProductsForCategory(3);
+                var amazonProd = productRepository.GetCategoryProducts(3);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
