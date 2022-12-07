@@ -6,13 +6,13 @@
 </head>
 
 
-@model Codecool.CodecoolShop.Models.ShoppingCart;
+@model List<Codecool.CodecoolShop.Models.ShoppingCart>;
 <div style="width: 120px; height: 300px; left:10px; ">
-    @foreach(var item in Model.Produtcs)
+    @foreach(var item in Model)
     {
-    <h5>@item.Key.Name</h5>    
-    <h5>@item.Value</h5>    
-    <h5>@item.Key.DefaultPrice</h5>    
+    <h5>@item.name</h5>    
+    <h5>@item.quantity</h5>    
+    <h5>@item.defaultPrice</h5>    
     }
 </div>
 <div class="wrapper">

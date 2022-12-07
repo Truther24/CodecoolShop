@@ -4,10 +4,12 @@ namespace Codecool.CodecoolShop.Models
 {
     public class ShoppingCart
     {
-        public int ShoppingCartId { get; set; }
 
         public string name { get; set; }
-        public Dictionary<Product,int> Produtcs { get; set; } = new Dictionary<Product,int>();
+        public int defaultPrice{ get; set; }
+        public int quantity { get; set; }
+        public int subtotal{ get; set; }
+        
 
 
     }

@@ -35,8 +35,6 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("/Index")]
         public IActionResult Index()
         {
-            /*var products = ProductService.GetProductsForCategory(2);*/
-            /*var products = ProductService.GetALlProducts();*/
             var products = productRepository.GetAllProducts();
             return View(products.ToList());
         }
@@ -45,7 +43,6 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("/Cart")]
         public IActionResult Cart()
         {
-            /*var products = ProductService.GetProductsForCategory(2);*/
             var products = ProductService.GetALlProducts();
             var aaa = Request.Form["name"];
             return View("Index", products.ToList());
@@ -53,15 +50,7 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult AddToCart(Guid id)
         {
-            //var products = ProductService.GetALlProducts();
-            //foreach (var product in products)
-            //{
-            //    if (product.Id == id)
-            //    {
-            //        shoppingCartService.AddProductToCart(product);
-            //        break;
-            //    }
-            //}
+           
             shoppingCartRepository.InsertIntoShoppingCart(id);
             return Redirect("/Index");
         }

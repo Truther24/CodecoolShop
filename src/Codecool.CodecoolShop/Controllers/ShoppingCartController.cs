@@ -1,6 +1,8 @@
 ﻿using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Repositories;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +12,7 @@ namespace Codecool.CodecoolShop.Controllers
     {
 
         public Product product = new Product();
-
+        private readonly ShoppingCartRepository shoppingCartRepository;
         public ProductService ProductService { get; set; } = new ProductService();
 
         public List<Product> products= new List<Product>();
@@ -18,39 +20,25 @@ namespace Codecool.CodecoolShop.Controllers
         public ShoppingCartService shoppingCartService= new ShoppingCartService();
 
 
+        public ShoppingCartController(ShoppingCartRepository shoppingCartRepository)
+        {
+            
+           
+            this.shoppingCartRepository = shoppingCartRepository;
+         
+        }
+
+
+
         public IActionResult Index()
         {
-            return View(DatabaseShoppingCart.shoppingCart);
+            return View(shoppingCartRepository.GetAllProductsfromCart());
         }
 
 
-        public IActionResult IncreaseQuantity(Guid id)
-        {
-            var products = ProductService.GetALlProducts();
-            foreach (var product in products)
-            {
-                if (product.Id == id)
-                {
-                    shoppingCartService.AddProductToCart(product);
-                    break;
-                }
-            }
-            return Redirect("/ShoppingCart");
-        }
+        
 
-        public IActionResult DecreaseQuantity(Guid id)
-        {
-            var products = ProductService.GetALlProducts();
-            foreach (var product in products)
-            {
-                if (product.Id == id)
-                {
-                    shoppingCartService.RemoveProductFromCart(product);
-                    break;
-                }
-            }
-            return Redirect("/ShoppingCart");
-        }
+        
 
         public IActionResult Checkout()
         {
