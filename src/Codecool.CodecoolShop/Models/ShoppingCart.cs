@@ -6,10 +6,5 @@ namespace Codecool.CodecoolShop.Models
     {
         public int ShoppingCartId { get; set; }
         public Dictionary<Product,int> Produtcs { get; set; } = new Dictionary<Product,int>();
-
-
-        
-
-
     }
 }

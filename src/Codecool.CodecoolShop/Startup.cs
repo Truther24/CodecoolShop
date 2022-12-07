@@ -27,6 +27,8 @@ namespace Codecool.CodecoolShop
         {
             services.AddControllersWithViews();
             services.AddScoped<ProductRepository>();
+            services.AddScoped<ShoppingCartRepository>();
+
 
         }
 
