@@ -46,5 +46,18 @@ namespace Codecool.CodecoolShop.Controllers
         }
 
 
+        public IActionResult DecreaseQuantity(Guid id)
+        {
+            shoppingCartRepository.DecreaseQuantity(id);
+            return Redirect("/ShoppingCart");
+        }
+
+        public IActionResult IncreaseQuantity(Guid id)
+        {
+            shoppingCartRepository.IncreaseQuantity(id);
+            return Redirect("/ShoppingCart");
+        }
+
+
     }
 }

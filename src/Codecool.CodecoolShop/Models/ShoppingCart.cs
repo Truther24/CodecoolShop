@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Codecool.CodecoolShop.Models
 {
@@ -9,6 +10,7 @@ namespace Codecool.CodecoolShop.Models
         public int defaultPrice{ get; set; }
         public int quantity { get; set; }
         public int subtotal{ get; set; }
+        public Guid id{ get; set; }
         
 
 

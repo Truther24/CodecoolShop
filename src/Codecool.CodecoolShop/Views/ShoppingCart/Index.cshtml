@@ -44,9 +44,9 @@
                 <td>@product.defaultPrice</td>
                 <td>@product.quantity &emsp; &emsp;
                     <style="display: inline-block">
-                    &emsp;<a  asp-controller="ShoppingCart" asp-action="" asp-route-id="">&#8593</a>&emsp;
+                    &emsp;<a  asp-controller="ShoppingCart" asp-action="IncreaseQuantity" asp-route-id="@product.id">&#8593</a>&emsp;
 
-                    &emsp;<a asp-controller="ShoppingCart" asp-action="" asp-route-id="" style="display: inline-block">&#8595</a>&emsp;
+                    &emsp;<a asp-controller="ShoppingCart" asp-action="DecreaseQuantity" asp-route-id="@product.id" style="display: inline-block">&#8595</a>&emsp;
                 </td>
                 <td> @product.subtotal</td>
                  
