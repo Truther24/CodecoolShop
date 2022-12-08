@@ -27,7 +27,7 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Register(string username,string password)
         {
             registerRepository.InsertUserIntoDb(username, password);
-            return Redirect("Registration/LogIn");
+            return Redirect("LogIn");
         }
 
 
@@ -52,6 +52,12 @@ namespace Codecool.CodecoolShop.Controllers
             
         }
 
-
+        [HttpGet]
+        public IActionResult logout()
+        {
+            HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("id");
+            return Redirect("/Registration/LogIn");
+        }
     }
 }

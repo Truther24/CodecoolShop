@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
-using System.Security.Cryptography.X509Certificates;
-using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Codecool.CodecoolShop.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -79,6 +77,8 @@ namespace Codecool.CodecoolShop.Controllers
                 && mouse is null && headphones is null
                 )
             {
+                ViewBag.username = HttpContext.Session.GetString("username");
+
                 return View("Index", allProducts);
             }
 
@@ -136,7 +136,7 @@ namespace Codecool.CodecoolShop.Controllers
                     returnProducts.Add(product);
                 }
             }
-
+            ViewBag.username = HttpContext.Session.GetString("username");
             returnProducts = returnProducts.Distinct().ToList();
             return View("Index", returnProducts.ToList());
         }
