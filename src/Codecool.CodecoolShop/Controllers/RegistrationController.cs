@@ -1,4 +1,5 @@
 ﻿using Codecool.CodecoolShop.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -43,6 +44,8 @@ namespace Codecool.CodecoolShop.Controllers
         {
             if (registerRepository.IsUserRegistered(username, password))
             {
+                HttpContext.Session.SetString("username", username);
+                HttpContext.Session.SetString("id", registerRepository.GetUSerId(username, password).ToString());
                 return Redirect("/Index");
             }
             return Redirect("Registration/Register");

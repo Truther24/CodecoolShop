@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Codecool.CodecoolShop.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -38,6 +39,9 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index()
         {
             var products = productRepository.GetAllProducts();
+            ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.id = HttpContext.Session.GetString("id");
+
             return View(products.ToList());
         }
 
@@ -51,8 +55,9 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult AddToCart(Guid id)
         {
-           
-            shoppingCartRepository.InsertIntoShoppingCart(id);
+            ViewBag.id = HttpContext.Session.GetString("id");
+
+            shoppingCartRepository.InsertIntoShoppingCart(id, ViewBag.id );
             return Redirect("/Index");
         }
         public IActionResult Privacy()

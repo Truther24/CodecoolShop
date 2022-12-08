@@ -29,6 +29,8 @@ namespace Codecool.CodecoolShop
             services.AddScoped<ProductRepository>();
             services.AddScoped<ShoppingCartRepository>();
             services.AddScoped<RegisterRepository>();
+            services.AddSession();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +50,7 @@ namespace Codecool.CodecoolShop
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
