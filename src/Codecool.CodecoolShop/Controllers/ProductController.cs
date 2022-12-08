@@ -45,14 +45,6 @@ namespace Codecool.CodecoolShop.Controllers
             return View(products.ToList());
         }
 
-        [HttpPost]
-        [Route("/Cart")]
-        public IActionResult Cart()
-        {
-            var products = shoppingCartRepository.GetAllProductsfromCart();
-            return View("Index", products.ToList());
-        }
-
         public IActionResult AddToCart(Guid id)
         {
             ViewBag.id = HttpContext.Session.GetString("id");

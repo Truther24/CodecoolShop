@@ -23,7 +23,7 @@ namespace Codecool.CodecoolShop.Repositories
         
         public void InsertIntoShoppingCart(Guid id,string userId)
         {
-            bool productAlreadyExistsInCart = CheckIfProductExistsInCart(id);
+            bool productAlreadyExistsInCart = CheckIfProductExistsInCart(id, userId);
             string sql = "";
             if (productAlreadyExistsInCart)
             {
@@ -45,17 +45,17 @@ namespace Codecool.CodecoolShop.Repositories
             }
         }
 
-        private bool CheckIfProductExistsInCart(Guid id)
+        private bool CheckIfProductExistsInCart(Guid productId, string userId)
         {
-            var sql = "select sp.productId from ShoppingCart sp";
-            var productIds = new List<Guid>();
+            var sql = "select sp.productId, sp.userId from ShoppingCart sp";
+            var productIds = new List<(Guid, string)>();
             using (var connection = new SqlConnection(ConnectionString))
             {
-                productIds = connection.Query<Guid>(sql).ToList();
+                productIds = connection.Query<(Guid, string)>(sql).ToList();
             }
-            foreach (Guid eachId in productIds)
+            foreach ((Guid, string) eachId in productIds)
             {
-                if (eachId == id)
+                if (eachId.Item1 == productId && eachId.Item2 == userId)
                 {
                     return true;
                 }
