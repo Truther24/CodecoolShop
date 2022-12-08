@@ -2,6 +2,7 @@
 using Codecool.CodecoolShop.Repositories;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,8 @@ namespace Codecool.CodecoolShop.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        public readonly IConfiguration Configuration;
-        public ShoppingCartController(IConfiguration configuration)
-        {
-            Configuration= configuration;
-        }
+        
+        
         public Product product = new Product();
         private readonly ShoppingCartRepository shoppingCartRepository;
         public ProductService ProductService { get; set; } = new ProductService();

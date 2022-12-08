@@ -8,7 +8,7 @@ namespace Codecool.CodecoolShop.Services
 {
     public class ProductService
     {
-        public IEnumerable<Product> GetALlProducts(IConfiguration configuration)
+        public IEnumerable<Product> GetALlProducts()
         {
             return DatabaseProducts.Products;
         }

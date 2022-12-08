@@ -1,5 +1,4 @@
 ﻿using Codecool.CodecoolShop.Models;
-using Codecool.CodecoolShop.Repositories.Codecool.CodecoolShop.Repositories;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;

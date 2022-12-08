@@ -8,6 +8,8 @@ using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Configuration;
+using Codecool.CodecoolShop.Repositories;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -43,8 +45,7 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("/Cart")]
         public IActionResult Cart()
         {
-            var products = ProductService.GetALlProducts();
-            var aaa = Request.Form["name"];
+            var products = shoppingCartRepository.GetAllProductsfromCart();
             return View("Index", products.ToList());
         }
 

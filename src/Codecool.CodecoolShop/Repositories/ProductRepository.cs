@@ -5,7 +5,6 @@ using Codecool.CodecoolShop.Models;
 using System.Collections.Generic;
 using Dapper;
 using System.Linq;
-using Codecool.CodecoolShop.Repositories.Codecool.CodecoolShop.Repositories;
 
 namespace Codecool.CodecoolShop.Repositories
 {
