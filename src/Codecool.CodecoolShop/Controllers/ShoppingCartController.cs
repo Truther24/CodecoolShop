@@ -29,7 +29,7 @@ namespace Codecool.CodecoolShop.Controllers
         }
 
 
-
+        [Route("/ShoppingCart")]
         public IActionResult Index()
         {
             return View(shoppingCartRepository.GetAllProductsfromCart());
@@ -42,7 +42,7 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Checkout()
         {
-            return View("Checkout", DatabaseShoppingCart.shoppingCart);
+            return View("Checkout", shoppingCartRepository.GetAllProductsfromCart());
         }
 
 

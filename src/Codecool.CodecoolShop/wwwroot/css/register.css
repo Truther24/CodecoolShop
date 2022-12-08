@@ -1,0 +1,49 @@
+﻿body {
+    background-color: burlywood;
+    color: white;
+}
+
+
+#customers tr:nth-child(even) {
+    background-color: seagreen;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+h1 {
+    color: palevioletred;
+}
+
+h1 {
+    background-color: aquamarine;
+}
+
+strong {
+    color: darkolivegreen;
+}
+
+h4 {
+    color: cornflowerblue;
+}
+
+h3 {
+    color: #1821ff
+}
+
+#applicants\ {
+    color: #1821ff;
+}
+
+.content-wrapper {
+    padding: 10%;
+}
