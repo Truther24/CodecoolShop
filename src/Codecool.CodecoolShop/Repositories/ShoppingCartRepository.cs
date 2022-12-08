@@ -3,6 +3,7 @@ using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -18,8 +19,8 @@ namespace Codecool.CodecoolShop.Repositories
 
 
 
-
-        public void InsertIntoShoppingCart(Guid id)
+        
+        public void InsertIntoShoppingCart(Guid id,string userId)
         {
             bool productAlreadyExistsInCart = CheckIfProductExistsInCart(id);
             string sql = "";
@@ -30,13 +31,14 @@ namespace Codecool.CodecoolShop.Repositories
             else
             {
 
-                sql = "insert into ShoppingCart(productId, quantity) values(@id, 1)";
+                sql = "insert into ShoppingCart(productId, quantity,userId) values(@id, 1,@userId)";
             }
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.Parameters.AddWithValue("id", id);
+                command.Parameters.AddWithValue("userId", userId);
                 command.ExecuteNonQuery();
                 connection.Close();
             }
@@ -60,9 +62,9 @@ namespace Codecool.CodecoolShop.Repositories
             return false;
         }
 
-        public List<ShoppingCart> GetAllProductsfromCart()
+        public List<ShoppingCart> GetAllProductsfromCart(string userId)
         {
-            var sql = "select p.name ,p.id, p.defaultPrice , sp.quantity , (p.defaultPrice * sp.quantity) as subtotal from Product p\r\nleft join ShoppingCart sp on p.id = sp.productId\r\nwhere sp.quantity is not null\r\norder by defaultPrice";
+            var sql = $"select p.name ,p.id, p.defaultPrice , sp.quantity , (p.defaultPrice * sp.quantity) as subtotal from Product p\r\nleft join ShoppingCart sp on p.id = sp.productId\r\nwhere sp.quantity is not null and sp.userId like '{userId}'\r\norder by defaultPrice";
             var products = new List<ShoppingCart>();
             using (var connection = new SqlConnection(ConnectionString))
             {

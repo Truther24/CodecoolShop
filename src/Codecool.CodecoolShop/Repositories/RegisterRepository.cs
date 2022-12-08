@@ -5,6 +5,8 @@ using Codecool.CodecoolShop.Models;
 using Dapper;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Codecool.CodecoolShop.Repositories
 {
@@ -41,12 +43,40 @@ namespace Codecool.CodecoolShop.Repositories
             {
                 if (user.email == username && user.password == password)
                 {
+                    
                     return true;
                 }
 
 
             }
             return false;
+
+
+        }
+
+
+        public Guid GetUSerId(string username, string password)
+        {
+            var sql = "select u.id,u.email, u.password from [User] u";
+            var users = new List<User>();
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                users = connection.Query<User>(sql).ToList();
+            }
+            foreach (var user in users)
+            {
+                if (user.email == username && user.password == password)
+                {
+
+                    return user.id;
+                }
+
+
+            }
+
+            return Guid.Empty;
+
         }
 
 

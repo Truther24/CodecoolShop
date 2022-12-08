@@ -1,6 +1,7 @@
 ﻿using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Repositories;
 using Codecool.CodecoolShop.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -32,7 +33,8 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("/ShoppingCart")]
         public IActionResult Index()
         {
-            return View(shoppingCartRepository.GetAllProductsfromCart());
+            ViewBag.id = HttpContext.Session.GetString("id");
+            return View(shoppingCartRepository.GetAllProductsfromCart(ViewBag.id));
         }
 
 
@@ -42,7 +44,7 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Checkout()
         {
-            return View("Checkout", shoppingCartRepository.GetAllProductsfromCart());
+            return View("Checkout", shoppingCartRepository.GetAllProductsfromCart(ViewBag.id = HttpContext.Session.GetString("id")));
         }
 
 
