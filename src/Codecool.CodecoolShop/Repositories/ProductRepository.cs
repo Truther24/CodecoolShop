@@ -17,7 +17,7 @@ namespace Codecool.CodecoolShop.Repositories
 
         public List<Product> GetAllProducts()
         {
-            var sql = "select p.id, p.name , p.defaultPrice, p.currency , p.description , s.name as supplierName , pr.name as CategoryName from Product p \r\ninner join Supplier s on p.supplierId = s.id\r\ninner join ProductCategory pr on p.productCategoryId = pr.id";
+            var sql = "select p.name ,p.id, p.defaultPrice, p.currency , p.description , s.name as supplierName , pr.name as CategoryName from Product p \r\ninner join Supplier s on p.supplierId = s.id\r\ninner join ProductCategory pr on p.productCategoryId = pr.id";
             var products = new List<Product>();
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -27,7 +27,7 @@ namespace Codecool.CodecoolShop.Repositories
         }
 
 
-        public List<Product> GetAmazonSupplierProducts(int supplierId)
+        public List<Product> GetSupplierProducts(int supplierId )
         {
             var sql = $"select p.name , p.defaultPrice, p.currency , p.description , s.name as supplierName , pr.name as CategoryName from Product p \r\ninner join Supplier s on p.supplierId = s.id\r\ninner join ProductCategory pr on p.productCategoryId = pr.id\r\nwhere s.id = {supplierId}";
             var products = new List<Product>();
@@ -37,6 +37,7 @@ namespace Codecool.CodecoolShop.Repositories
             }
             return products;
         }
+
         public List<Product> GetCategoryProducts(int categoryId)
         {
             var sql = $"select p.name , p.defaultPrice, p.currency , p.description , s.name as supplierName , pr.name as CategoryName from Product p \r\ninner join Supplier s on p.supplierId = s.id\r\ninner join ProductCategory pr on p.productCategoryId = pr.id\r\nwhere pr.id = {categoryId}";
@@ -47,5 +48,8 @@ namespace Codecool.CodecoolShop.Repositories
             }
             return products;
         }
+
+
+
     }
 }

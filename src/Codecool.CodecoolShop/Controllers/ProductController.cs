@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Models;
 using Codecool.CodecoolShop.Services;
-using Microsoft.Extensions.Configuration;
-using Codecool.CodecoolShop.Repositories;
+using System.Security.Cryptography.X509Certificates;
+using System.Runtime.CompilerServices;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -18,16 +18,16 @@ namespace Codecool.CodecoolShop.Controllers
         private readonly ILogger<ProductController> _logger;
         private readonly ProductRepository productRepository;
         private readonly ShoppingCartRepository shoppingCartRepository;
+
         public ProductService ProductService { get; set; }
         public ShoppingCartService shoppingCartService { get; set; } = new();
+        
 
-        public ProductController(ILogger<ProductController> logger,
-            ProductRepository productRepository,
-            ShoppingCartRepository shoppingCartRepository)
+        public ProductController(ILogger<ProductController> logger,ProductRepository productRepository,ShoppingCartRepository shoppingCartRepository)
         {
             _logger = logger;
             this.productRepository = productRepository;
-            this.shoppingCartRepository= shoppingCartRepository;
+            this.shoppingCartRepository = shoppingCartRepository;
             ProductService = new ProductService();
         }
 
@@ -35,7 +35,6 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("/Index")]
         public IActionResult Index()
         {
-            /*var products = ProductService.GetProductsForCategory(2);*/
             var products = productRepository.GetAllProducts();
             return View(products.ToList());
         }
@@ -44,16 +43,15 @@ namespace Codecool.CodecoolShop.Controllers
         [Route("/Cart")]
         public IActionResult Cart()
         {
-            /*var products = ProductService.GetProductsForCategory(2);*/
-            var products = ProductService.GetALlProducts(Configuration);
+            var products = ProductService.GetALlProducts();
             var aaa = Request.Form["name"];
             return View("Index", products.ToList());
         }
 
         public IActionResult AddToCart(Guid id)
         {
+           
             shoppingCartRepository.InsertIntoShoppingCart(id);
-            
             return Redirect("/Index");
         }
         public IActionResult Privacy()
@@ -88,7 +86,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (amazon == "on")
             {
-                var amazonProd = productRepository.GetAmazonSupplierProducts(1);
+                var amazonProd = productRepository.GetSupplierProducts(1);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -97,7 +95,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (lenovo == "on")
             {
-                var amazonProd = productRepository.GetAmazonSupplierProducts(2);
+                var amazonProd = productRepository.GetSupplierProducts(2);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -106,7 +104,7 @@ namespace Codecool.CodecoolShop.Controllers
 
             if (apple == "on")
             {
-                var amazonProd = productRepository.GetAmazonSupplierProducts(1);
+                var amazonProd = productRepository.GetSupplierProducts(3);
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);
@@ -126,7 +124,6 @@ namespace Codecool.CodecoolShop.Controllers
             if (headphones == "on")
             {
                 var amazonProd = productRepository.GetCategoryProducts(2);
-
                 foreach (var product in amazonProd)
                 {
                     returnProducts.Add(product);

@@ -11,10 +11,15 @@ namespace Codecool.CodecoolShop.Repositories
 {
     public class ShoppingCartRepository : BaseRepository
     {
+        //private SqlConnection connection;
+
         public ShoppingCartRepository(IConfiguration _configuration) : base(_configuration)
         {
 
         }
+
+
+
 
         public void InsertIntoShoppingCart(Guid id)
         {
@@ -47,14 +52,67 @@ namespace Codecool.CodecoolShop.Repositories
             {
                 productIds = connection.Query<Guid>(sql).ToList();
             }
-            foreach(Guid eachId in productIds)
+            foreach (Guid eachId in productIds)
             {
-                if(eachId == id)
+                if (eachId == id)
                 {
                     return true;
                 }
             }
             return false;
         }
+
+        public List<ShoppingCart> GetAllProductsfromCart()
+        {
+            var sql = "select p.name ,p.id, p.defaultPrice , sp.quantity , (p.defaultPrice * sp.quantity) as subtotal from Product p\r\nleft join ShoppingCart sp on p.id = sp.productId\r\nwhere sp.quantity is not null\r\norder by defaultPrice";
+            var products = new List<ShoppingCart>();
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                products = connection.Query<ShoppingCart>(sql).ToList();
+            }
+            return products;
+        }
+
+        public void IncreaseQuantity(Guid id)
+        {
+            string sql = "update ShoppingCart set quantity = quantity +1 where productId = @id";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("id", id);
+                command.ExecuteNonQuery();
+            }
+
+        }
+
+        public void DecreaseQuantity(Guid id)
+        {
+
+            string sql = "update ShoppingCart set quantity = quantity -1 where productId = @id";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("id", id);
+                command.ExecuteNonQuery();
+            }
+            CheckForQuantity();
+
+        }
+
+        public void CheckForQuantity()
+        {
+            var sql = "delete from ShoppingCart where quantity = 0 ";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
+
+
     }
 }

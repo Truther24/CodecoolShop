@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
-@model Codecool.CodecoolShop.Models.ShoppingCart;
+@model List<Codecool.CodecoolShop.Models.ShoppingCart>;
 
 
 <h1>Shopping cart</h1>
@@ -34,25 +34,26 @@
         @{
             decimal total = 0;
         }
-        @foreach (var product in Model.Produtcs)
+        @foreach (var product in Model)
         {
 
             <tr>
 
-                <td>@product.Key.Name</td>
+                <td>@product.name</td>
 
-                <td>@product.Key.DefaultPrice</td>
-                <td>@product.Value &emsp; &emsp;
+                <td>@product.defaultPrice</td>
+                <td>@product.quantity &emsp; &emsp;
                     <style="display: inline-block">
-                    &emsp;<a  asp-controller="ShoppingCart" asp-action="IncreaseQuantity" asp-route-id="@product.Key.Id">&#8593</a>&emsp;
+                    &emsp;<a  asp-controller="ShoppingCart" asp-action="IncreaseQuantity" asp-route-id="@product.id">&#8593</a>&emsp;
 
-                    &emsp;<a asp-controller="ShoppingCart" asp-action="DecreaseQuantity" asp-route-id="@product.Key.Id" style="display: inline-block">&#8595</a>&emsp;
+                    &emsp;<a asp-controller="ShoppingCart" asp-action="DecreaseQuantity" asp-route-id="@product.id" style="display: inline-block">&#8595</a>&emsp;
                 </td>
-                <td>@(product.Key.DefaultPrice * product.Value)</td>
+                <td> @product.subtotal</td>
                  
                 
             </tr>
-            total += @product.Key.DefaultPrice * product.Value;
+            
+            total += @product.subtotal;
             
         }
 
