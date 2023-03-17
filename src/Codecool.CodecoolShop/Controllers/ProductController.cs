@@ -40,6 +40,12 @@ namespace Codecool.CodecoolShop.Controllers
             ViewBag.username = HttpContext.Session.GetString("username");
             ViewBag.id = HttpContext.Session.GetString("id");
 
+
+            if(ViewBag.username  == null)
+            {
+            return Redirect("/");
+
+            }
             return View(products.ToList());
         }
 
@@ -48,13 +54,14 @@ namespace Codecool.CodecoolShop.Controllers
             ViewBag.id = HttpContext.Session.GetString("id");
 
             shoppingCartRepository.InsertIntoShoppingCart(id, ViewBag.id );
+
+            if (ViewBag.id == null)
+            {
+                return Redirect("/");
+
+            }
             return Redirect("/Index");
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

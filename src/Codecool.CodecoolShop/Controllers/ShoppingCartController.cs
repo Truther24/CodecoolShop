@@ -36,6 +36,11 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index()
         {
             ViewBag.id = HttpContext.Session.GetString("id");
+            if (ViewBag.id == null)
+            {
+                return Redirect("/");
+
+            }
             return View(shoppingCartRepository.GetAllProductsfromCart(ViewBag.id));
         }
 
@@ -46,6 +51,12 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Checkout()
         {
+            ViewBag.id = HttpContext.Session.GetString("id");
+            if (ViewBag.id == null)
+            {
+                return Redirect("/");
+
+            }
             return View("Checkout", shoppingCartRepository.GetAllProductsfromCart(ViewBag.id = HttpContext.Session.GetString("id")));
         }
 
