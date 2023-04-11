@@ -9,14 +9,14 @@ Alternatively, you can navigate to the bin folder and run the CodecoolShop.exe f
 # Features
 CodecoolShop includes the following features:
 
-<img src=https://github.com/Truther24/Drink4You/blob/alex/Screenshot_2.png class="img-class">
+<img src=https://github.com/Truther24/CodecoolShop/blob/alex/Screenshot%202023-04-11%20093302.png class="img-class">
 
 ### Product catalog:
 View the products available in the shop, along with their name, price, and image.
 ### Shopping cart: 
 Add products to your cart and view the total cost of your order.
 
-<img src=https://github.com/Truther24/Drink4You/blob/alex/Screenshot_2.png class="img-class">
+<img src=https://github.com/Truther24/CodecoolShop/blob/alex/Screenshot%202023-04-11%20093736.png class="img-class">
 
 ### Checkout: 
 Enter your shipping and payment details and place your order.
